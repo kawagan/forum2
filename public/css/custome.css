@@ -1,0 +1,15 @@
+h4.no-margin{
+    margin: 0px;
+}
+.top-margin{
+    margin-top: 3px;
+}
+.thread-title1{
+    margin: 0; margin-bottom: 6px;
+}
+.reply-hide{
+    display: none;
+}
+.reply-show{
+    display: block;
+}
