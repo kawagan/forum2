@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Event;
 use App\Events\ThreadRecievedNewReply;
 use App\Trending\Visits;
 use Laravel\Scout\Searchable;
-use Stevebauman\Purify\Facades\Purify; // for clean text
+use Stevebauman\Purify\Facades\Purify;
 
 class Thread extends Model
 {
