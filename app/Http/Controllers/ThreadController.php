@@ -18,7 +18,7 @@ class ThreadController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index','show']);
-        $this->middleware('must-be-confirmed')->only('store');// for confirm email
+        $this->middleware('must-be-confirmed')->only('store');// for confirm  user email
     }
 
     public function index(Channel $channel ,ThreadFilters $filter, Trending $trending)
