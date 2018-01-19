@@ -14,6 +14,7 @@ trait Favoritable
             $reply->favorites->each->delete();
         });
     }
+    
     public function favorites()
     {
         // get all replie's favorites
