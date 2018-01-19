@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('avatar_path')->nullable();
+            $table->unsignedInteger('reputation')->default(0);
             $table->boolean('confirmed')->default(true);
             $table->string('confirmation_token',25)->nullable()->unique(); // this for confirmation email after send email
             $table->rememberToken();

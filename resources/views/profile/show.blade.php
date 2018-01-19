@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div>
-                <h3 class="page-header m">{{$userProfile->name}}</h3>
+                <h3 class="page-header m">{{$userProfile->name}} ({{$userProfile->reputation}}xp)</h3>
                 
                 <!-- i use it without $this->authorize() -->
                 @can('update',$userProfile)

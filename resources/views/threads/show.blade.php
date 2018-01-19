@@ -11,7 +11,7 @@
                                 <img src="{{$thread->owner->avatar_image}}" width="50" height="50" >
                             </div>
                             <div class="col-md-8 text-left"> 
-                                <a href="{{route('profile',$thread->owner)}}">{{$thread->owner->name}}</a> posted: {{$thread->title}}
+                                <a href="{{route('profile',$thread->owner)}}">{{$thread->owner->name}} ({{$thread->owner->reputation}} xp)</a> posted: {{$thread->title}}
                             </div>
                             
                             <!--policy for delete, only user which has made thread can delete it-->

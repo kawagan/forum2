@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         App\User::truncate();
         App\Thread::truncate();
         App\Reply::truncate();
+        App\ThreadSubscription::truncate();
         
         $quantityUser=10;
         $quantityThread=50;
