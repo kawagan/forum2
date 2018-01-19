@@ -6,6 +6,7 @@ use App\Traits\Favoritable;
 use App\Traits\RecordsActivity;
 use Carbon\Carbon;
 use Stevebauman\Purify\Facades\Purify;
+use App\Reputation\Reputation;
 
 class Reply extends Model
 {
@@ -23,10 +24,19 @@ class Reply extends Model
         // this both function tirger after create and delete,
         // this triger also , when run db:seed, i mean when run db seeding
         static::created(function($reply){
-           $reply->thread->increment('replies_count');  
+           $reply->thread->increment('replies_count'); 
+           
+           // reputation
+           //$reply->owner->increment('reputation',2);
+           // or 
+           // reputation ,i use it for reply and thread and maybe more
+           // for that we will make class for that to change on one place,
+           // and we make const varaible to change in one place(class only) and not in every place
+           Reputation::award($reply->owner, Reputation::REPLY_POSTED);
         });
         static::deleted(function($reply){
-           $reply->thread->decrement('replies_count');  
+           $reply->thread->decrement('replies_count'); 
+           Reputation::reduce($reply->owner, Reputation::REPLY_POSTED);
         });
         //or
         /*static::deleting(function($reply){
