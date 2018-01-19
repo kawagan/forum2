@@ -13,6 +13,7 @@ use App\Events\ThreadRecievedNewReply;
 use App\Trending\Visits;
 use Laravel\Scout\Searchable;
 use Stevebauman\Purify\Facades\Purify;
+use App\Reputation\Reputation;
 
 class Thread extends Model
 {
@@ -63,6 +64,8 @@ class Thread extends Model
               $reply->delete();
           }) ; */ // or
           $thread->replies->each->delete();  
+        //--------------------------------------------
+        Reputation::reduce($thread->owner, Reputation::THREAD_WAS_PUBLIDHED);
         });
         
         
@@ -79,6 +82,7 @@ class Thread extends Model
         // this work perfect for ModelFactory ,when run db:seed then this also run, and make desfualt slug in threads table
         static::created(function($thread){
             $thread->update(['slug'=>$thread->title]);
+            Reputation::award($thread->owner, Reputation::THREAD_WAS_PUBLIDHED); // explaned in Reply in static::created();
         });
     }
     
@@ -217,7 +221,7 @@ class Thread extends Model
     {
         // we use exists to return boolean value
         return $this->subscriptions()
-                ->where('user_id',auth()->user()->id)
+                ->where('user_id',auth()->id()) // auth()->user()->id() this give me error, see it later
                 ->exists();
     }
     
