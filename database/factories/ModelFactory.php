@@ -19,11 +19,18 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'confirmed'=>true,
+         'isAdmin'=>false,
         'confirmation_token'=>null,
         'password' => $password ?: $password = bcrypt('test12'),
         'remember_token' => str_random(10),
     ];
 });
+
+// $factory->state(App\User::class, 'administrator', function () {
+//     return [
+//         'isAdmin' => true
+//     ];
+// });
 
 $factory->define(App\Channel::class, function (Faker\Generator $faker) {
 
@@ -31,6 +38,7 @@ $factory->define(App\Channel::class, function (Faker\Generator $faker) {
     return [
         'name'=>$name,  //php , Java , like category
         'slug'=>$name,
+        'description'=>$faker->sentence,
     ];
 });
 
