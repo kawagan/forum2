@@ -22,6 +22,14 @@ class User extends Authenticatable
     protected $casts=[
         'confirmed'=>'boolean'
     ];
+    
+    /**
+     * The accessors to append to the model's array form.
+     * @var array
+     */
+    protected $appends = [
+      'isAdmin'
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -90,6 +98,16 @@ class User extends Authenticatable
     // only Admin can make lock a thread
     public function isAdmin()
     {
-        return in_array($this->name, ['kawa','lavand']);
+        return in_array($this->email, config('council.administrators'));
     }
+    
+    /**
+     * Determine if the user is an administrator.
+     * @return bool
+     */
+    public function getIsAdminAttribute()
+    {
+        return $this->isAdmin();
+    }
+
 }
